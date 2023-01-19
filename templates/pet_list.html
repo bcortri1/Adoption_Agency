@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class ="container">
+    <h1 class="text-center text-muted">Pets</h1>
+    <div class = "d-flex flex-wrap justify-content-center">
+        <a href="/add">
+            <div class="card m-3 bg-light" style="width: 18rem; height: 22rem;" >
+                <img class="my-auto" src="https://images.onlinelabels.com/images/clip-art/enki/enki_grey_plus_sign.png" alt="Click to add pet">
+            </div>
+        </a>
+        {% for pet in pets %}
+        <a href="/{{pet.id}}">
+            <div class="card m-3" style="width: 18rem; height: 22rem;" >
+                <img class="card-image-top" src="{{pet.photo_url}}" alt="Picture of {{pet.name}}">
+                <div class ="card-body">
+                {% if pet.available == True %}
+                    <p class="card-text text-success font-weight-bold">{{pet.name}} <span class="card-text text-secondary font-weight-bold">is available</span></p>
+                {% else %}
+                    <p class="card-text text-muted">{{pet.name}} has been adopted!</p>
+                {% endif%}
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

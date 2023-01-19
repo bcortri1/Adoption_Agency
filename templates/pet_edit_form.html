@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <div class="card card-body mx-auto bg-light m-3">
+        <h1 class="text-center">Pet Details</h1>
+        <form  id="pet-edit-form" method="POST">
+            {{ form.hidden_tag() }}
+            
+            {% for field in form if field.widget.input_type != 'hidden' %}
+                    <div class="row form-group">
+                        {{ field.label(class_="col-form-label col-sm-2") }}
+                {% if field.widget.input_type != 'checkbox' %}
+                        <div class="col-sm-8">
+                            {{ field(class_="form-control") }}
+                        </div>
+                    </div>
+                {% else %}
+                        <div class="col-sm-8">
+                            {{ field(class_="form-check-label") }}
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% for error in field.errors %}
+                    <small class="form-text text-danger">{{ error }}</small>
+                {% endfor %}
+        
+            {% endfor %}
+            <a href="/"><button class="btn btn-danger" type="button">Cancel</button><a>
+            <button class="btn btn-success" type="submit">Save</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
